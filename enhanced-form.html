@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stephen Kingori - HTML5 Forms Assignment</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, #5D5CDE, #4a4ac7);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+
+        section {
+            background: white;
+            margin-bottom: 2rem;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1,
+        h2 {
+            margin-bottom: 1rem;
+        }
+
+        h2 {
+            color: #5D5CDE;
+            border-bottom: 2px solid #5D5CDE;
+            padding-bottom: 0.5rem;
+        }
+
+        /* Lists Styling */
+        .lists-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        ul,
+        ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-list {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .feature-list li {
+            padding: 0.5rem;
+            background: #f8f9fa;
+            margin-bottom: 0.5rem;
+            border-left: 4px solid #5D5CDE;
+            border-radius: 4px;
+        }
+
+        /* Table Styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        th,
+        td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #5D5CDE;
+            color: white;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        tr:hover {
+            background-color: #e9ecef;
+        }
+
+        /* Media Styling */
+        .media-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        .media-item {
+            text-align: center;
+        }
+
+        .media-item img,
+        .media-item video,
+        .media-item audio {
+            max-width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Form Styling */
+        form {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        fieldset {
+            border: 2px solid #5D5CDE;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        legend {
+            color: #5D5CDE;
+            font-weight: bold;
+            padding: 0 10px;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #5D5CDE;
+            box-shadow: 0 0 0 3px rgba(93, 92, 222, 0.1);
+        }
+
+        input:valid {
+            border-color: #28a745;
+        }
+
+        input:invalid:not(:focus):not(:placeholder-shown) {
+            border-color: #dc3545;
+        }
+
+        .radio-group,
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .radio-item,
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .radio-item input,
+        .checkbox-item input {
+            width: auto;
+            margin: 0;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #5D5CDE, #4a4ac7);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .required {
+            color: #dc3545;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: #666;
+            background: white;
+            border-radius: 8px;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .lists-container {
+                grid-template-columns: 1fr;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .radio-group,
+            .checkbox-group {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Advanced HTML5 Form Assignment</h1>
+            <p>Student Registration System - Stephen Kingori</p>
+        </header>
+
+        <!-- Lists Section -->
+        <section>
+            <h2>Content Organization with Lists</h2>
+            <div class="lists-container">
+                <div>
+                    <h3>HTML5 Form Features (Ordered List)</h3>
+                    <ol>
+                        <li>Native input validation</li>
+                        <li>Multiple input types</li>
+                        <li>Accessibility improvements</li>
+                        <li>Mobile-friendly controls</li>
+                        <li>Pattern matching</li>
+                    </ol>
+                </div>
+                <div>
+                    <h3>Browser Support (Unordered List)</h3>
+                    <ul>
+                        <li>Chrome 10+</li>
+                        <li>Firefox 4+</li>
+                        <li>Safari 5+</li>
+                        <li>Edge 12+</li>
+                        <li>Opera 10+</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>Key Benefits (Styled List)</h3>
+            <ul class="feature-list">
+                <li>✅ No JavaScript required for basic validation</li>
+                <li>🚀 Better user experience with instant feedback</li>
+                <li>♿ Enhanced accessibility for screen readers</li>
+                <li>📱 Mobile-optimized input controls</li>
+            </ul>
+        </section>
+
+        <!-- Table Section -->
+        <section>
+            <h2>Data Organization with Tables</h2>
+            <p>Browser compatibility matrix for HTML5 form features:</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Chrome</th>
+                        <th>Firefox</th>
+                        <th>Safari</th>
+                        <th>Edge</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Email validation</td>
+                        <td>✅ Full</td>
+                        <td>✅ Full</td>
+                        <td>✅ Full</td>
+                        <td>✅ Full</td>
+                    </tr>
+                    <tr>
+                        <td>Date picker</td>
+                        <td>✅ Full</td>
+                        <td>⚠️ Partial</td>
+                        <td>✅ Full</td>
+                        <td>✅ Full</td>
+                    </tr>
+                    <tr>
+                        <td>Pattern validation</td>
+                        <td>✅ Full</td>
+                        <td>✅ Full</td>
+                        <td>✅ Full</td>
+                        <td>✅ Full</td>
+                    </tr>
+                    <tr>
+                        <td>Color picker</td>
+                        <td>✅ Full</td>
+                        <td>✅ Full</td>
+                        <td>❌ None</td>
+                        <td>✅ Full</td>
+                    </tr>
+                    <tr>
+                        <td>Range slider</td>
+                        <td>✅ Full</td>
+                        <td>✅ Full</td>
+                        <td>✅ Full</td>
+                        <td>✅ Full</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Media Section -->
+        <section>
+            <h2>Media Content Integration</h2>
+            <div class="media-grid">
+                <div class="media-item">
+                    <h3>Personal Image Gallery</h3>
+                    <img src="/images/20250720_145716.jpg"
+                        alt="Stephen Kingori's photo gallery demonstrating HTML5 image element" width="400"
+                        height="250">
+                    <p>HTML5 &lt;img&gt; element with responsive attributes</p>
+                    <small>Source: Kingori Stephen photo took while in kicc Nairobi</small>
+                </div>
+
+                <div class="media-item">
+                    <h3>Audio Sample</h3>
+                    <audio controls preload="metadata">
+                        <source src="https://www.soundjay.com/misc/sounds/bell-ringing-05.wav" type="audio/wav">
+                        <source src="https://www.soundjay.com/misc/sounds/bell-ringing-05.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                    <p>HTML5 &lt;audio&gt; element with multiple source formats</p>
+                </div>
+
+                <div class="media-item">
+                    <h3>Educational Video Content</h3>
+                    <iframe width="400" height="225" src="https://www.youtube.com/embed/8Ec7Fv2hOQo?si=th0XErL0vvoDZTpd"
+                        title="Educational Video - Stephen Kingori" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+                    </iframe>
+                    <p>HTML5 &lt;iframe&gt; element for embedded YouTube content</p>
+                    <small>Personal inpiration from power learn project</small>
+                </div>
+            </div>
+        </section>
+
+        <!-- Form Section -->
+        <section>
+            <h2>Advanced HTML5 Form with Native Validation</h2>
+            <form action="#" method="post" novalidate>
+
+                <!-- Personal Information Fieldset -->
+                <fieldset>
+                    <legend>Personal Information</legend>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">First Name <span class="required">*</span></label>
+                            <input type="text" id="firstName" name="firstName" required minlength="2" maxlength="50"
+                                autocomplete="given-name" placeholder="Enter your first name">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="lastName">Last Name <span class="required">*</span></label>
+                            <input type="text" id="lastName" name="lastName" required minlength="2" maxlength="50"
+                                autocomplete="family-name" placeholder="Enter your last name">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address <span class="required">*</span></label>
+                        <input type="email" id="email" name="email" required autocomplete="email"
+                            placeholder="example@domain.com">
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                                autocomplete="tel" placeholder="123-456-7890"
+                                title="Please enter phone number in format: 123-456-7890">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="birthDate">Date of Birth</label>
+                            <input type="date" id="birthDate" name="birthDate" min="1900-01-01" max="2010-12-31"
+                                autocomplete="bday">
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!-- Account Information Fieldset -->
+                <fieldset>
+                    <legend>Account Information</legend>
+
+                    <div class="form-group">
+                        <label for="username">Username <span class="required">*</span></label>
+                        <input type="text" id="username" name="username" required minlength="3" maxlength="20"
+                            pattern="[a-zA-Z0-9_]+" autocomplete="username" placeholder="Choose a username"
+                            title="Username must contain only letters, numbers, and underscores">
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="password">Password <span class="required">*</span></label>
+                            <input type="password" id="password" name="password" required minlength="8"
+                                pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+"
+                                autocomplete="new-password" placeholder="Create a strong password"
+                                title="Password must be 8+ characters with uppercase, lowercase, number, and special character">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="confirmPassword">Confirm Password <span class="required">*</span></label>
+                            <input type="password" id="confirmPassword" name="confirmPassword" required
+                                autocomplete="new-password" placeholder="Confirm your password">
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!-- Preferences Fieldset -->
+                <fieldset>
+                    <legend>Preferences & Details</legend>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="age">Age</label>
+                            <input type="number" id="age" name="age" min="13" max="120" step="1"
+                                placeholder="Enter your age">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="website">Website URL</label>
+                            <input type="url" id="website" name="website" placeholder="https://example.com">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="favoriteColor">Favorite Color</label>
+                            <input type="color" id="favoriteColor" name="favoriteColor" value="#5D5CDE">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="satisfaction">Satisfaction Level</label>
+                            <input type="range" id="satisfaction" name="satisfaction" min="1" max="10" value="5"
+                                step="1">
+                            <div
+                                style="display: flex; justify-content: space-between; font-size: 12px; margin-top: 5px;">
+                                <span>1 (Low)</span>
+                                <span>10 (High)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="country">Country <span class="required">*</span></label>
+                        <select id="country" name="country" required autocomplete="country">
+                            <option value="">Select your country</option>
+                            <option value="US">Kenya</option>
+                            <option value="CA">Nigeria</option>
+                            <option value="UK">Uganda</option>
+                            <option value="DE">Tanzania</option>
+                            <option value="FR">Ghana</option>
+                            <option value="JP">congo</option>
+                            <option value="AU">United state</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Gender</label>
+                        <div class="radio-group">
+                            <div class="radio-item">
+                                <input type="radio" id="male" name="gender" value="male">
+                                <label for="male">Male</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="female" name="gender" value="female">
+                                <label for="female">Female</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="other" name="gender" value="other">
+                                <label for="other">Other</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="prefer-not-to-say" name="gender" value="prefer-not-to-say">
+                                <label for="prefer-not-to-say">Prefer not to say</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Interests (Select all that apply)</label>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="tech" name="interests" value="technology">
+                                <label for="tech">Technology</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="sports" name="interests" value="sports">
+                                <label for="sports">Sports</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="music" name="interests" value="music">
+                                <label for="music">Music</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="travel" name="interests" value="travel">
+                                <label for="travel">Travel</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="reading" name="interests" value="reading">
+                                <label for="reading">Reading</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="cooking" name="interests" value="cooking">
+                                <label for="cooking">Cooking</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="bio">Biography</label>
+                        <textarea id="bio" name="bio" rows="4" maxlength="500"
+                            placeholder="Tell us about yourself (max 500 characters)"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="resume">Upload Resume (PDF only)</label>
+                        <input type="file" id="resume" name="resume" accept=".pdf" title="Please upload a PDF file">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="referralCode">Referral Code (Read-only example)</label>
+                        <input type="text" id="referralCode" name="referralCode" value="REF2024-HTML5" readonly
+                            style="background-color: #f8f9fa;">
+                    </div>
+                </fieldset>
+
+                <!-- Agreement Fieldset -->
+                <fieldset>
+                    <legend>Agreement</legend>
+
+                    <div class="form-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="terms" name="terms" required>
+                            <label for="terms">I agree to the <a href="#" target="_blank">Terms and Conditions</a> <span
+                                    class="required">*</span></label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="newsletter" name="newsletter">
+                            <label for="newsletter">Subscribe to our newsletter for updates</label>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <div style="text-align: center; margin-top: 2rem;">
+                    <button type="submit" class="submit-btn">Submit Registration</button>
+                </div>
+            </form>
+        </section>
+
+        <footer>
+            <p>Stephen Kingori - Web Development Assignment</p>
+            <p>power lern project cohort 6th</p>
+            <p>This assignment demonstrates HTML5 form capabilities and semantic markup</p>
+        </footer>
+    </div>
+</body>
+
+</html>
